@@ -1,5 +1,3 @@
-#![allow(unused)]
-
 use anyhow::Result;
 
 #[tokio::test]
