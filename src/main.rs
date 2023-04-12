@@ -7,7 +7,7 @@ use serde::Deserialize;
 
 #[tokio::main]
 async fn main() {
-    let routes_hello = Router::new().route("/hello", get(handler_hello));
+    let routes_hello = Router::new().route("/books", get(handler_books));
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 8888));
     println!("--> LISTENING ON {addr}\n");
@@ -17,14 +17,14 @@ async fn main() {
         .unwrap();
 }
 
-async fn handler_hello(Query(params): Query<HelloParams>) -> impl IntoResponse {
-    println!("->> {:12} - handler_hello - {params:?}", "HANDLER");
+async fn handler_books(Query(params): Query<GetBooksParams>) -> impl IntoResponse {
+    println!("->> {:12} - books_hanler - {params:?}", "HANDLER");
 
-    let name = params.name.as_deref().unwrap_or("World!");
-    Html(format!("Hello {name}"))
+    let title = params.title.as_deref().unwrap_or("empty");
+    Html(format!("books with title: {title}"))
 }
 
 #[derive(Debug, Deserialize)]
-struct HelloParams {
-    name: Option<String>,
+struct GetBooksParams {
+    title: Option<String>,
 }
