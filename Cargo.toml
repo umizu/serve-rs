@@ -11,3 +11,4 @@ tokio = { version = "1.27.0", features = ["full"] }
 
 [dev-dependencies]
 anyhow = "1.0.70"
+httpc-test = "0.1.1"
